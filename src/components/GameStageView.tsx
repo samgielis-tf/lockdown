@@ -5,6 +5,7 @@ import { Text } from "@chakra-ui/react"
 
 export interface GameStageViewProps {
     stage: Stage
+    onStageCompleted: () => void
 }
 
 export const GameStageView = ({ stage }: GameStageViewProps) => {

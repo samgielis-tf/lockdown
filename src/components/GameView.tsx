@@ -3,7 +3,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { Game } from "../model/Game";
 import { GameState } from "../model/GameState";
-import { loadGameState } from "../utils/persistance";
+import { loadGameState, persistGameState } from "../utils/persistance";
 import { EndOfGame } from "./EndOfGame";
 import { GameStageView } from "./GameStageView";
 
@@ -13,6 +13,15 @@ interface GameViewProps {
 
 export const GameView = ({ game }: GameViewProps) => {
     const [gameState, setGameState] = useState<GameState | undefined>();
+
+    const handleStageCompleted = () => {
+        if (!gameState) {
+            return;
+        }
+        const newState = { currentStage: gameState.currentStage + 1 };
+        persistGameState(newState);
+        setGameState(newState);
+    };
 
     useEffect(() => {
         let previousGameState = loadGameState();
@@ -33,7 +42,7 @@ export const GameView = ({ game }: GameViewProps) => {
 
     if (hasNextStage) {
         const currentStage = game.stages[gameState.currentStage];
-        return <GameStageView stage={currentStage} />
+        return <GameStageView stage={currentStage} onStageCompleted={handleStageCompleted} />
     }
 
     return <EndOfGame />
