@@ -21,6 +21,7 @@ export const GameView = ({ game }: GameViewProps) => {
         const newState = { currentStage: gameState.currentStage + 1 };
         persistGameState(newState);
         setGameState(newState);
+        window.location = window.location;
     };
 
     useEffect(() => {
