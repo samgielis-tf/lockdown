@@ -39,11 +39,9 @@ export const GameView = ({ game }: GameViewProps) => {
     }
 
     const hasNextStage = gameState.currentStage < game.stages.length;
+    const currentStage = game.stages[gameState.currentStage];
 
-    if (hasNextStage) {
-        const currentStage = game.stages[gameState.currentStage];
-        return <GameStageView stage={currentStage} onStageCompleted={handleStageCompleted} />
-    }
-
-    return <EndOfGame />
+    return (
+        hasNextStage ? <GameStageView stage={currentStage} onStageCompleted={handleStageCompleted} /> : <EndOfGame/>
+    )
 }
