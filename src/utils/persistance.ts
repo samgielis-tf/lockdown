@@ -7,9 +7,9 @@ export function loadGameState(): GameState | null {
         return null;
     }
 
-    return JSON.parse(storedState);
+    return JSON.parse(atob(storedState));
 }
 
 export function persistGameState(state: GameState): void {
-    localStorage.setItem("state", JSON.stringify(state));
+    localStorage.setItem("state", btoa(JSON.stringify(state)));
 }
