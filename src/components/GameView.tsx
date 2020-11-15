@@ -1,9 +1,10 @@
-import { Grid, Spinner, VStack } from "@chakra-ui/react";
+import { Box, Grid, HStack, Spinner, VStack } from "@chakra-ui/react";
 import React from "react";
 import { useEffect, useState } from "react";
 import { Game } from "../model/Game";
 import { GameState } from "../model/GameState";
 import { loadGameState, persistGameState } from "../utils/persistance";
+import { ClueVault } from "./ClueVault";
 import { EndOfGame } from "./EndOfGame";
 import { GameHelp } from "./GameHelp";
 import { GameProgress } from "./GameProgress";
@@ -46,7 +47,12 @@ export const GameView = ({ game }: GameViewProps) => {
 
     return (
         <Grid minH="100vh" p={10}>
-            <GameHelp />
+            <Box justifySelf="end" >
+                <HStack spacing={2} isInline>
+                    <GameHelp />
+                    <ClueVault clues={game.stages.slice(0, gameState.currentStage).map(stage => stage.clue)} />
+                </HStack>
+            </Box>
             {
                 hasNextStage
                     ? <VStack spacing={8}>
