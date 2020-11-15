@@ -5,6 +5,7 @@ import { Game } from "../model/Game";
 import { GameState } from "../model/GameState";
 import { loadGameState, persistGameState } from "../utils/persistance";
 import { EndOfGame } from "./EndOfGame";
+import { GameHelp } from "./GameHelp";
 import { GameProgress } from "./GameProgress";
 import { GameStageView } from "./GameStageView";
 
@@ -48,6 +49,7 @@ export const GameView = ({ game }: GameViewProps) => {
             ? <VStack spacing={8}>
                 <GameProgress stageNumber={gameState.currentStage + 1} />
                 <GameStageView stage={currentStage} onStageCompleted={handleStageCompleted} />
+                <GameHelp/>
             </VStack>
             : <EndOfGame />
     )
