@@ -1,10 +1,11 @@
-import { Spinner } from "@chakra-ui/react";
+import { Spinner, VStack } from "@chakra-ui/react";
 import React from "react";
 import { useEffect, useState } from "react";
 import { Game } from "../model/Game";
 import { GameState } from "../model/GameState";
 import { loadGameState, persistGameState } from "../utils/persistance";
 import { EndOfGame } from "./EndOfGame";
+import { GameProgress } from "./GameProgress";
 import { GameStageView } from "./GameStageView";
 
 interface GameViewProps {
@@ -43,6 +44,11 @@ export const GameView = ({ game }: GameViewProps) => {
     const currentStage = game.stages[gameState.currentStage];
 
     return (
-        hasNextStage ? <GameStageView stage={currentStage} onStageCompleted={handleStageCompleted} /> : <EndOfGame/>
+        hasNextStage
+            ? <VStack spacing={8}>
+                <GameStageView stage={currentStage} onStageCompleted={handleStageCompleted} />
+                <GameProgress stageNumber={gameState.currentStage + 1} amountOfStages={game.stages.length} />
+            </VStack>
+            : <EndOfGame />
     )
 }
