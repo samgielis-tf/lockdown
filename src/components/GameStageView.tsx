@@ -43,31 +43,40 @@ interface StageQuestionViewProps extends WithMetricsCollectorProps {
 const StageQuestionView = ({ stage, onCorrectAnswer, metricsCollector }: StageQuestionViewProps) => {
     const [submittedAnswer, setSubmittedAnswer] = useState("");
     const toast = useToast();
+    const validateAnswer = () => {
+        if (submittedAnswer === stage.answer) {
+            metricsCollector.logSolution();
+            toast({
+                title: "Correct antwoord.",
+                status: "success",
+                duration: 3000,
+                isClosable: true,
+            })
+            onCorrectAnswer();
+        } else {
+            metricsCollector.logAttempt();
+            toast({
+                title: "Fout antwoord",
+                status: "error",
+                duration: 3000,
+                isClosable: true,
+            })
+        }
+    }
     return (
         <VStack spacing={4}>
-            <Text>{stage.question}</Text>
-            <Input colorScheme="green" onChange={({ target }) => {
-                setSubmittedAnswer(target.value);
-            }} />
+            <Text fontSize={35}>{stage.question}</Text>
+            <Input colorScheme="green"
+                onChange={({ target }) => {
+                    setSubmittedAnswer(target.value);
+                }}
+                onKeyUp={({ key }) => {
+                    if (key === "Enter") {
+                        validateAnswer();
+                    }
+                }} />
             <Button onClick={() => {
-                if (submittedAnswer === stage.answer) {
-                    metricsCollector.logSolution();
-                    toast({
-                        title: "Correct antwoord.",
-                        status: "success",
-                        duration: 3000,
-                        isClosable: true,
-                    })
-                    onCorrectAnswer();
-                } else {
-                    metricsCollector.logAttempt();
-                    toast({
-                        title: "Fout antwoord",
-                        status: "error",
-                        duration: 3000,
-                        isClosable: true,
-                    })
-                }
+                validateAnswer();
             }}>Antwoorden</Button>
         </VStack>
     );
