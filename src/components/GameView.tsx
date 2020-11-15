@@ -1,10 +1,11 @@
-import { Spinner, VStack } from "@chakra-ui/react";
+import { Grid, Spinner, VStack } from "@chakra-ui/react";
 import React from "react";
 import { useEffect, useState } from "react";
 import { Game } from "../model/Game";
 import { GameState } from "../model/GameState";
 import { loadGameState, persistGameState } from "../utils/persistance";
 import { EndOfGame } from "./EndOfGame";
+import { GameHelp } from "./GameHelp";
 import { GameProgress } from "./GameProgress";
 import { GameStageView } from "./GameStageView";
 
@@ -44,11 +45,16 @@ export const GameView = ({ game }: GameViewProps) => {
     const currentStage = game.stages[gameState.currentStage];
 
     return (
-        hasNextStage
-            ? <VStack spacing={8}>
-                <GameProgress stageNumber={gameState.currentStage + 1} />
-                <GameStageView stage={currentStage} onStageCompleted={handleStageCompleted} />
-            </VStack>
-            : <EndOfGame />
+        <Grid minH="100vh" p={10}>
+            <GameHelp />
+            {
+                hasNextStage
+                    ? <VStack spacing={8}>
+                        <GameProgress stageNumber={gameState.currentStage + 1} />
+                        <GameStageView stage={currentStage} onStageCompleted={handleStageCompleted} />
+                    </VStack>
+                    : <EndOfGame />
+            }
+        </Grid>
     )
 }
