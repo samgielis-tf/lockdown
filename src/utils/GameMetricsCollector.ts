@@ -3,7 +3,7 @@ interface StageMetrics {
     solutionTime?: Date;
 }
 
-interface GameMetrics {
+export interface GameMetrics {
     stageMetrics: StageMetrics[]
 }
 

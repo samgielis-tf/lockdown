@@ -10,6 +10,7 @@ import { EndOfGame } from "./EndOfGame";
 import { GameHelp } from "./GameHelp";
 import { GameProgress } from "./GameProgress";
 import { GameStageView } from "./GameStageView";
+import { MetricsReport } from "./MetricsReport";
 
 interface GameViewProps {
     game: Game
@@ -51,8 +52,9 @@ export const GameView = ({ game }: GameViewProps) => {
         <Grid minH="100vh" p={10}>
             <Box justifySelf="end" >
                 <HStack spacing={2} isInline>
-                    <GameHelp />
                     <ClueVault clues={game.stages.slice(0, gameState.currentStage).map(stage => stage.clue)} />
+                    <MetricsReport metrics={metricsCollector.metrics} />
+                    <GameHelp />
                 </HStack>
             </Box>
             {
