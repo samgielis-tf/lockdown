@@ -6,5 +6,5 @@ interface GameProgressProps {
 }
 
 export const GameProgress = ({ stageNumber }: GameProgressProps) => (
-    <Text fontSize={15}>{`Deel ${stageNumber}`}</Text>
+    <Text fontSize={20}>{`Deel ${stageNumber}`}</Text>
 );
