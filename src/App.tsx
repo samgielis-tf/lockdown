@@ -8,14 +8,14 @@ import {
 } from "@chakra-ui/react"
 import { GameView } from "./components/GameView"
 import { game } from "./data/game"
+import { GameHelp } from "./components/GameHelp"
 
 export const App = () => (
   <ChakraProvider theme={theme}>
-    <Box textAlign="center" fontSize="xl" background="gray.900" color="green.400">
+    <Box textAlign="center" background="gray.900" color="green.400">
       <Grid minH="100vh" p={10}>
-        <VStack spacing={8}>
-          <GameView game={game} />
-        </VStack>
+        <GameHelp />
+        <GameView game={game} />
       </Grid>
     </Box>
   </ChakraProvider>

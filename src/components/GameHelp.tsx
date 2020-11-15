@@ -1,14 +1,14 @@
-import { Button, IconButton, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure } from "@chakra-ui/react";
+import { Button, Flex, IconButton, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure } from "@chakra-ui/react";
 import { InfoIcon } from '@chakra-ui/icons'
 import React from "react";
 
 export const GameHelp = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     return (
-        <>
+        <Flex justifySelf="end">
             <IconButton variant="ghost" aria-label="Get help" icon={< InfoIcon />} onClick={onOpen} />
             <GameHelpModal isOpen={isOpen} onClose={onClose} />
-        </>
+        </Flex>
     );
 }
 
