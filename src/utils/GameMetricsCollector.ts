@@ -1,4 +1,4 @@
-interface StageMetrics {
+export interface StageMetrics {
     attempts: number;
     solutionTime?: Date;
 }
