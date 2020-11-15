@@ -64,7 +64,7 @@ const StageQuestionView = ({ stage, onCorrectAnswer, metricsCollector }: StageQu
         }
     }
     return (
-        <VStack spacing={4}>
+        <VStack spacing={4} maxW="700px">
             <Text fontSize={35}>{stage.question}</Text>
             <Input colorScheme="green"
                 onChange={({ target }) => {
