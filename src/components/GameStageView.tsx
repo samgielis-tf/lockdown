@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import Countdown from "./CountDown";
 import { Stage } from "../model/Stage";
-import { Box, Button, Input, Text, VStack } from "@chakra-ui/react"
+import { Box, Input, Text, VStack } from "@chakra-ui/react"
+import { useToast } from "@chakra-ui/react"
+import { Button } from "../atoms/Button";
 
 export interface GameStageViewProps {
     stage: Stage
@@ -20,7 +22,10 @@ const UnlockedStageView = ({ stage, onStageCompleted }: GameStageViewProps) => {
         <Box>
             { !stageComplete
                 ? <StageQuestionView stage={stage} onCorrectAnswer={() => { setStageComplete(true) }} />
-                : <EndOfStageView stage={stage} onStageCompleted={onStageCompleted} />
+                : <EndOfStageView stage={stage} onStageCompleted={() => {
+                    setStageComplete(false);
+                    onStageCompleted();
+                }} />
             }
         </Box>
     )
@@ -31,19 +36,40 @@ interface StageQuestionViewProps {
     onCorrectAnswer: () => void
 }
 
-const StageQuestionView = ({ stage, onCorrectAnswer }: StageQuestionViewProps) => (
-    <VStack spacing={4}>
-        <Text>{stage.question}</Text>
-        <Input onChange={({ target }) => {
-            if (target.value === stage.answer) {
-                onCorrectAnswer();
-            }
-        }} />
-    </VStack>
-);
+const StageQuestionView = ({ stage, onCorrectAnswer }: StageQuestionViewProps) => {
+    const [submittedAnswer, setSubmittedAnswer] = useState("");
+    const toast = useToast();
+    return (
+        <VStack spacing={4}>
+            <Text>{stage.question}</Text>
+            <Input onChange={({ target }) => {
+                setSubmittedAnswer(target.value);
+            }} />
+            <Button onClick={() => {
+                if (submittedAnswer === stage.answer) {
+                    toast({
+                        title: "Correct antwoord.",
+                        status: "success",
+                        duration: 3000,
+                        isClosable: true,
+                    })
+                    onCorrectAnswer();
+                } else {
+                    toast({
+                        title: "Fout antwoord",
+                        status: "error",
+                        duration: 3000,
+                        isClosable: true,
+                    })
+                }
+            }}>Antwoorden</Button>
+        </VStack>
+    );
+};
 
 const EndOfStageView = ({ stage, onStageCompleted }: GameStageViewProps) => (
     <VStack spacing={4}>
         <Text>{`Dit is jullie clue: ${stage.clue}`}</Text>
+        <Button onClick={onStageCompleted}>Volgende uitdaging</Button>
     </VStack>
 )
