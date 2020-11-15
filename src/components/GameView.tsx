@@ -46,8 +46,8 @@ export const GameView = ({ game }: GameViewProps) => {
     return (
         hasNextStage
             ? <VStack spacing={8}>
-                <GameStageView stage={currentStage} onStageCompleted={handleStageCompleted} />
                 <GameProgress stageNumber={gameState.currentStage + 1} />
+                <GameStageView stage={currentStage} onStageCompleted={handleStageCompleted} />
             </VStack>
             : <EndOfGame />
     )
