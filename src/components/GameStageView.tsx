@@ -45,6 +45,6 @@ const StageQuestionView = ({ stage, onCorrectAnswer }: StageQuestionViewProps) =
 const EndOfStageView = ({ stage, onStageCompleted }: GameStageViewProps) => (
     <VStack spacing={4}>
         <Text>{`Correct. Dit is jullie clue: ${stage.clue}`}</Text>
-        <Button onClick={onStageCompleted}>Volgende uitdaging</Button>
+view        <Button variant="outline" colorScheme="green" onClick={onStageCompleted}>Volgende uitdaging</Button>
     </VStack>
 )
