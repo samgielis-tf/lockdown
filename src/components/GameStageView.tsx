@@ -66,7 +66,7 @@ const StageQuestionView = ({ stage, onCorrectAnswer, metricsCollector }: StageQu
     return (
         <VStack spacing={4} maxW="700px">
             <Text fontSize={35}>{stage.question}</Text>
-            <Input colorScheme="green"
+            <Input colorScheme="green" maxW="500px"
                 onChange={({ target }) => {
                     setSubmittedAnswer(target.value);
                 }}
@@ -85,7 +85,7 @@ const StageQuestionView = ({ stage, onCorrectAnswer, metricsCollector }: StageQu
 const EndOfStageView = ({ stage, onStageCompleted }: GameStageViewProps) => (
     <VStack spacing={10}>
         <VStack spacing={2}>
-            <Text>{`Dit is jullie clue:`}</Text>
+            <Text fontSize={35}>{`Dit is jullie clue:`}</Text>
             <Tag size="lg" bgColor="green.400">{stage.clue}</Tag>
         </VStack>
         <Button onClick={onStageCompleted}>Volgende uitdaging</Button>
