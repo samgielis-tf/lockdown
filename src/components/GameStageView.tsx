@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Countdown from "./CountDown";
 import { Stage } from "../model/Stage";
-import { Box, Input, Text, VStack } from "@chakra-ui/react"
+import { Box, Input, Tag, Text, VStack } from "@chakra-ui/react"
 import { useToast } from "@chakra-ui/react"
 import { Button } from "../atoms/Button";
 
@@ -42,7 +42,7 @@ const StageQuestionView = ({ stage, onCorrectAnswer }: StageQuestionViewProps) =
     return (
         <VStack spacing={4}>
             <Text>{stage.question}</Text>
-            <Input onChange={({ target }) => {
+            <Input colorScheme="green" onChange={({ target }) => {
                 setSubmittedAnswer(target.value);
             }} />
             <Button onClick={() => {
@@ -68,8 +68,11 @@ const StageQuestionView = ({ stage, onCorrectAnswer }: StageQuestionViewProps) =
 };
 
 const EndOfStageView = ({ stage, onStageCompleted }: GameStageViewProps) => (
-    <VStack spacing={4}>
-        <Text>{`Dit is jullie clue: ${stage.clue}`}</Text>
+    <VStack spacing={10}>
+        <VStack spacing={2}>
+            <Text>{`Dit is jullie clue:`}</Text>
+            <Tag size="lg" bgColor="green.400">{stage.clue}</Tag>
+        </VStack>
         <Button onClick={onStageCompleted}>Volgende uitdaging</Button>
     </VStack>
 )
