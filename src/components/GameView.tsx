@@ -3,6 +3,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { Game } from "../model/Game";
 import { GameState } from "../model/GameState";
+import { GameMetricsCollector } from "../utils/GameMetricsCollector";
 import { loadGameState, persistGameState } from "../utils/persistance";
 import { ClueVault } from "./ClueVault";
 import { EndOfGame } from "./EndOfGame";
@@ -42,6 +43,7 @@ export const GameView = ({ game }: GameViewProps) => {
         return <Spinner size="xl" />
     }
 
+    const metricsCollector = new GameMetricsCollector(gameState.currentStage);
     const hasNextStage = gameState.currentStage < game.stages.length;
     const currentStage = game.stages[gameState.currentStage];
 
@@ -57,7 +59,7 @@ export const GameView = ({ game }: GameViewProps) => {
                 hasNextStage
                     ? <VStack spacing={8}>
                         <GameProgress stageNumber={gameState.currentStage + 1} />
-                        <GameStageView stage={currentStage} onStageCompleted={handleStageCompleted} />
+                        <GameStageView stage={currentStage} onStageCompleted={handleStageCompleted} metricsCollector={metricsCollector} />
                     </VStack>
                     : <EndOfGame />
             }

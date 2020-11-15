@@ -4,24 +4,28 @@ import { Stage } from "../model/Stage";
 import { Box, Input, Tag, Text, VStack } from "@chakra-ui/react"
 import { useToast } from "@chakra-ui/react"
 import { Button } from "../atoms/Button";
+import { GameMetricsCollector } from "../utils/GameMetricsCollector";
 
 export interface GameStageViewProps {
     stage: Stage
     onStageCompleted: () => void
 }
+export interface WithMetricsCollectorProps {
+    metricsCollector: GameMetricsCollector;
+}
 
-export const GameStageView = ({ stage, onStageCompleted }: GameStageViewProps) => {
+export const GameStageView = ({ stage, onStageCompleted, metricsCollector }: GameStageViewProps & WithMetricsCollectorProps) => {
     return <Countdown date={stage.startDate}>
-        <UnlockedStageView stage={stage} onStageCompleted={onStageCompleted} />
+        <UnlockedStageView stage={stage} onStageCompleted={onStageCompleted} metricsCollector={metricsCollector} />
     </Countdown>
 }
 
-const UnlockedStageView = ({ stage, onStageCompleted }: GameStageViewProps) => {
+const UnlockedStageView = ({ stage, onStageCompleted, metricsCollector }: GameStageViewProps & WithMetricsCollectorProps) => {
     const [stageComplete, setStageComplete] = useState(false);
     return (
         <Box>
             { !stageComplete
-                ? <StageQuestionView stage={stage} onCorrectAnswer={() => { setStageComplete(true) }} />
+                ? <StageQuestionView stage={stage} onCorrectAnswer={() => { setStageComplete(true) }} metricsCollector={metricsCollector} />
                 : <EndOfStageView stage={stage} onStageCompleted={() => {
                     setStageComplete(false);
                     onStageCompleted();
@@ -31,12 +35,12 @@ const UnlockedStageView = ({ stage, onStageCompleted }: GameStageViewProps) => {
     )
 };
 
-interface StageQuestionViewProps {
+interface StageQuestionViewProps extends WithMetricsCollectorProps {
     stage: Stage;
     onCorrectAnswer: () => void
 }
 
-const StageQuestionView = ({ stage, onCorrectAnswer }: StageQuestionViewProps) => {
+const StageQuestionView = ({ stage, onCorrectAnswer, metricsCollector }: StageQuestionViewProps) => {
     const [submittedAnswer, setSubmittedAnswer] = useState("");
     const toast = useToast();
     return (
@@ -47,6 +51,7 @@ const StageQuestionView = ({ stage, onCorrectAnswer }: StageQuestionViewProps) =
             }} />
             <Button onClick={() => {
                 if (submittedAnswer === stage.answer) {
+                    metricsCollector.logSolution();
                     toast({
                         title: "Correct antwoord.",
                         status: "success",
@@ -55,6 +60,7 @@ const StageQuestionView = ({ stage, onCorrectAnswer }: StageQuestionViewProps) =
                     })
                     onCorrectAnswer();
                 } else {
+                    metricsCollector.logAttempt();
                     toast({
                         title: "Fout antwoord",
                         status: "error",
