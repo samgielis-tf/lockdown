@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Countdown from "./CountDown";
 import { Stage } from "../model/Stage";
-import { Box, Input, Tag, Text, VStack } from "@chakra-ui/react"
+import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Input, Tag, Text, VStack } from "@chakra-ui/react"
 import { useToast } from "@chakra-ui/react"
 import { Button } from "../atoms/Button";
 import { GameMetricsCollector } from "../utils/GameMetricsCollector";
@@ -66,7 +66,7 @@ const StageQuestionView = ({ stage, onCorrectAnswer, metricsCollector }: StageQu
                 category: 'Game',
                 action: 'Bad answer',
                 label: submittedAnswer
-            });            
+            });
             ReactGA.event({
                 category: 'Game',
                 action: `BA [${submittedAnswer}]`,
@@ -74,20 +74,50 @@ const StageQuestionView = ({ stage, onCorrectAnswer, metricsCollector }: StageQu
         }
     }
     return (
-        <VStack spacing={4} maxW="700px">
-            <Text fontSize={35}>{stage.question}</Text>
-            <Input colorScheme="green" maxW="500px"
-                onChange={({ target }) => {
-                    setSubmittedAnswer(target.value);
-                }}
-                onKeyUp={({ key }) => {
-                    if (key === "Enter") {
-                        validateAnswer();
-                    }
-                }} />
-            <Button onClick={() => {
-                validateAnswer();
-            }}>Antwoorden</Button>
+        <VStack spacing={10} maxW="700px">
+            <Accordion defaultIndex={0} orientation="vertical" w="500px" fontSize={18} allowToggle textAlign="left" border="none" outline="none">
+                <AccordionItem border="none">
+                    <AccordionButton>
+                        <Box flex="1" textAlign="left" fontSize={25}>
+                            Vraag
+                         </Box>
+                        <AccordionIcon />
+                    </AccordionButton>
+                    <AccordionPanel pb={4}>
+                        {stage.question}
+                    </AccordionPanel>
+                </AccordionItem>
+                <AccordionItem border="none">
+                    <AccordionButton>
+                        <Box flex="1" textAlign="left" fontSize={25}>
+                            Tips
+                         </Box>
+                        <AccordionIcon />
+                    </AccordionButton>
+                    <AccordionPanel pb={4}>
+                        {
+                            stage.tips ?
+                                <ul>
+                                    {stage.tips.map(tip => <li key={tip}>{tip}</li>)}
+                                </ul>
+                                : "Geen tips beschikbaar."}
+                    </AccordionPanel>
+                </AccordionItem>
+            </Accordion>
+            <VStack spacing={2}>
+                <Input colorScheme="green" w="450px" borderColor="green.400" rounded="0px"
+                    onChange={({ target }) => {
+                        setSubmittedAnswer(target.value);
+                    }}
+                    onKeyUp={({ key }) => {
+                        if (key === "Enter") {
+                            validateAnswer();
+                        }
+                    }} />
+                <Button onClick={() => {
+                    validateAnswer();
+                }}>Antwoorden</Button>
+            </VStack>
         </VStack>
     );
 };

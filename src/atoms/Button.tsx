@@ -6,7 +6,7 @@ interface ButtonProps {
     onClick: () => void;
 }
 export const Button: FC<ButtonProps> = ({ onClick, children }) => (
-    <ChakraButton colorScheme="green" variant="outline" onClick={onClick}>
+    <ChakraButton colorScheme="green" color="gray.900" onClick={onClick} rounded="0px">
         {children}
     </ChakraButton>
 );
