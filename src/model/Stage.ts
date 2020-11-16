@@ -3,4 +3,5 @@ export interface Stage {
     question: string;
     answer: string;
     clue: string;
+    tips?: string[];
 }
