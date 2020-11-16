@@ -9,7 +9,7 @@ import { game } from "./data/game"
 import ReactGA from 'react-ga';
 
 export const App = () => {
-  ReactGA.initialize('G-EM7EKGSY32');
+  ReactGA.initialize('UA-183092537-1');
   ReactGA.pageview(window.location.pathname + window.location.search);
   return (
     <ChakraProvider theme={theme}>
