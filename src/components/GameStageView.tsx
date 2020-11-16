@@ -66,6 +66,10 @@ const StageQuestionView = ({ stage, onCorrectAnswer, metricsCollector }: StageQu
                 category: 'Game',
                 action: 'Bad answer',
                 label: submittedAnswer
+            });            
+            ReactGA.event({
+                category: 'Game',
+                action: `BA [${submittedAnswer}]`,
             });
         }
     }
