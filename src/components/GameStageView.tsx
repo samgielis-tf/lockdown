@@ -75,7 +75,7 @@ const StageQuestionView = ({ stage, onCorrectAnswer, metricsCollector }: StageQu
     }
     return (
         <VStack spacing={10} maxW="700px">
-            <Accordion defaultIndex={0} orientation="vertical" w="500px" fontSize={18} allowToggle textAlign="left" border="none" outline="none">
+            <Accordion defaultIndex={0} orientation="vertical" fontSize={18} allowToggle textAlign="left" border="none" outline="none">
                 <AccordionItem border="none">
                     <AccordionButton>
                         <Box flex="1" textAlign="left" fontSize={25}>
@@ -104,8 +104,8 @@ const StageQuestionView = ({ stage, onCorrectAnswer, metricsCollector }: StageQu
                     </AccordionPanel>
                 </AccordionItem>
             </Accordion>
-            <VStack spacing={2}>
-                <Input colorScheme="green" w="450px" borderColor="green.400" rounded="0px"
+            <VStack spacing={2} w="50%">
+                <Input colorScheme="green"borderColor="green.400" rounded="0px"
                     onChange={({ target }) => {
                         setSubmittedAnswer(target.value);
                     }}
