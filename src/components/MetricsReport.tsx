@@ -2,6 +2,7 @@ import { Text, Box, Button, Heading, IconButton, Modal, ModalBody, ModalCloseBut
 import React from "react";
 import { FaPoll } from "react-icons/fa";
 import { GameMetrics, StageMetrics } from "../utils/GameMetricsCollector";
+import ReactGA from 'react-ga';
 
 interface MetricsReportProps {
     metrics: GameMetrics;
@@ -16,7 +17,13 @@ export const MetricsReport = ({ metrics }: MetricsReportProps) => {
                 variant="ghost"
                 aria-label="Show game report"
                 icon={< FaPoll />}
-                onClick={onOpen}
+                onClick={() => {
+                    ReactGA.event({
+                        category: 'Game',
+                        action: 'Open metrics',
+                    });
+                    onOpen();
+                }}
             />
             <MetricsReportModal metrics={metrics} isOpen={isOpen} onClose={onClose} />
         </>
