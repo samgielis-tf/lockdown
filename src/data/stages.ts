@@ -8,7 +8,7 @@ const Stage1 = {
 };
 
 const Stage2 = {
-    startDate: new Date("Nov 16, 2020 18:30:00"),
+    startDate: new Date("Nov 16, 2020 19:30:00"),
     question: "SWsgemF0IHZhbmRhYWcgaW4gZWVuIGtsZWluIHBhcmtqZSwgZW4gaWsgd291IG5hYXIgZGUgc3RlcnJlbiBnYWFuIGtpamtlbi4gSWsgbmFtIGRlIHNuZWxzdGUgd2VnIG5hYXIgbWlqbiB2ZXJ2b2Vyc21pZGRlbCwgZW4gc3Bvb3JkZSBlcm5hYXJ0b2UuIEhvZXZlZWwgbW9tZW50amVzIGR1dXJkZSBtaWpuIHJlaXMsIGFscyBqZSB3ZWV0IGRhdCBpayBvbSAxNy40OSBuYWFyIGRlIHN0ZXJyZW4ga2Vlaz8=",
     answer: "MzEuMzM=",
     clue: "aXM=",
