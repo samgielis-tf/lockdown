@@ -5,6 +5,7 @@ import { Box, Input, Tag, Text, VStack } from "@chakra-ui/react"
 import { useToast } from "@chakra-ui/react"
 import { Button } from "../atoms/Button";
 import { GameMetricsCollector } from "../utils/GameMetricsCollector";
+import ReactGA from 'react-ga';
 
 export interface GameStageViewProps {
     stage: Stage
@@ -60,7 +61,12 @@ const StageQuestionView = ({ stage, onCorrectAnswer, metricsCollector }: StageQu
                 status: "error",
                 duration: 3000,
                 isClosable: true,
-            })
+            });
+            ReactGA.event({
+                category: 'Game',
+                action: 'Bad answer',
+                label: submittedAnswer
+            });
         }
     }
     return (

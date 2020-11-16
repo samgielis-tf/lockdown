@@ -11,6 +11,7 @@ import { GameHelp } from "./GameHelp";
 import { GameProgress } from "./GameProgress";
 import { GameStageView } from "./GameStageView";
 import { MetricsReport } from "./MetricsReport";
+import ReactGA from 'react-ga';
 
 interface GameViewProps {
     game: Game
@@ -23,6 +24,11 @@ export const GameView = ({ game }: GameViewProps) => {
         if (!gameState) {
             return;
         }
+        ReactGA.event({
+            category: 'Game',
+            action: 'Completed stage',
+            value: gameState.currentStage
+        });
         const newState = { currentStage: gameState.currentStage + 1 };
         persistGameState(newState);
         setGameState(newState);

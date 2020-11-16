@@ -1,6 +1,7 @@
 import { Button, HStack, IconButton, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Tag, useDisclosure } from "@chakra-ui/react";
 import React from "react";
 import { FaArchive } from "react-icons/fa";
+import ReactGA from 'react-ga';
 
 interface ClueVaultProps {
     clues: string[];
@@ -15,7 +16,13 @@ export const ClueVault = ({ clues }: ClueVaultProps) => {
                 variant="ghost"
                 aria-label="Open vault"
                 icon={< FaArchive />}
-                onClick={onOpen}
+                onClick={() => {
+                    ReactGA.event({
+                        category: 'Game',
+                        action: 'Open vault',
+                    });
+                    onOpen();
+                }}
             />}
             <ClueVaultModal clues={clues} isOpen={isOpen} onClose={onClose} />
         </>
