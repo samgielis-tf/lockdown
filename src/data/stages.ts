@@ -17,9 +17,10 @@ const Stage2 = {
 
 const Stage3 = {
     startDate: new Date("Nov 17, 2020 19:30:00"),
-    question: "V2F0IGlzIGRlIGxldWtzdGUgc3RhZD8=",
-    answer: "TGV1dmVu",
-    clue: "TG9jYXRpZQ=="
+    question: "SWsgc3RhIG9wIGVlbiBkdWl2ZWxzZSBicnVnIG1ldCBkcmFrZW5ob29mZC4gSWsgYmVuIGdvZWQgdm9vcmJlcmVpZCBlbiByZWlzIG1ldCBtaWpuIHNjb290ZXIgb20gdGUgZ2FhbiBiaWRkZW4gYmlqIG1pam4gem9vbi4gRGFuIGdhIGlrIGxhbmdzIGJpaiBtaWpuIHZyb3V3ZW4sIGVuIGJpZGRlbiB3ZSBzYW1lbi4gSWsgZWluZGlnIG1pam4gZGFnIG1ldCAyMDAgZ2xpbWxhY2hlbi4gSG9ldmVlbCBrZWVyIG1vZXQgaWsgZGllIGRhZyB0YW5rZW4sIGFscyBqZSB3ZWV0IGRhdCBpayAxIGxpdGVyIGJlbnppbmUgb3AgMzUga2lsb21ldGVyIHZlcmJydWlrLiBJbiBtaWpuIHRhbmsga2FuIDYsNSBsaXRlci4=",
+    answer: "Mi43MA==",
+    clue: "TG9jYXRpZQ==",
+    tips: ["Alle berekeningen werden gedaan met Google Maps.", "Antwoord tot op 2 cijfers na de komma."]
 };
 
 const Stage4 = {
