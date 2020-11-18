@@ -25,9 +25,10 @@ const Stage3 = {
 
 const Stage4 = {
     startDate: new Date("Nov 18, 2020 19:30:00"),
-    question: "V2F0IGlzIGhldCBiZXN0ZSBiaWVyPw==",
-    answer: "U3RlbGxh",
-    clue: "SG91c2U="
+    question: "SWsgbGllZyB2b29yIG1pam4gYmVzdGUgdnJpZW5kaW4sIGVuIGhlbHAgaGFhciB3ZWdrb21lbiBtZXQgbW9vcmQuCk1pam4genVzIHdlcmt0IGJpaiBSYWxwaCBMYXVyZW4uCkhhYXIgZXgtbWFuIGhlZWZ0IDYga2luZGVyZW4uCkRpZSB3b24gZWVuIG9zY2FyLCB3aWUgc3BlZWxkZSBkZSBqb25nZSB2cm91dyBpbiBkaWUgZmlsbT8KTWV0IHdlbGtlIGdyb3RlIG5hYW0gbmFtIHplIGhldCBvcCB0ZWdlbiBzZWtzaXNtZSBvcCBkZSB3ZXJrdmxvZXI/CldpZSBrd2FtIHppaiBkYW4gd2VlciB0ZWdlbiBvcCBkZSB3ZWc/",
+    answer: "VmlnZ28gTW9ydGVuc2Vu",
+    clue: "SG91c2U=",
+    tips: ["Het antwoord is hoofdletter-gevoelig."]
 };
 
 export const encryptedStages: Stage[] = [Stage1, Stage2, Stage3, Stage4];
